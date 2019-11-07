@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Keyboard } from 'react-native';
+import {
+  Keyboard,
+  FlatList,
+  Image,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../../services/api';
@@ -51,24 +58,25 @@ export default function Main() {
           onSubmitEditing={findUser}
         />
         <SubmitButton onPress={findUser}>
-          <Icon name="add" size={20} color="#fff" />
+          <Icon name="person-add" size={20} color="#fff" />
         </SubmitButton>
       </Form>
 
       <List
         data={users}
-        keyExtractor={item => item.login}
-        renderItem={({ item }) => (
-          <User>
-            <Avatar source={{ uri: item.avatar }} />
-            <Name>{item.name}</Name>
-            <Bio>{item.bio}</Bio>
-            <ProfileButton onPress={() => {}}>
-              <Icon name="add" size={20} color="#fff" />
-              <TextButton>Visualizar perfil</TextButton>
-            </ProfileButton>
-          </User>
-        )}
+        keyExtractor={item => item.name}
+        renderItem={({ item }) => {
+          return (
+            <View>
+              <Avatar source={{ uri: item.avatar }} />
+              <Text>{item.name}</Text>
+              <Text>{item.bio}</Text>
+              <TouchableOpacity onPress={() => {}}>
+                <Text>Visualizar perfil</Text>
+              </TouchableOpacity>
+            </View>
+          );
+        }}
       />
     </Container>
   );

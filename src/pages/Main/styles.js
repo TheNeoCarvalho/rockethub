@@ -16,9 +16,9 @@ export const Input = styled.TextInput.attrs({
   placeholderTextColor: '#666',
 })`
   flex: 1;
-  height: 60px;
+  height: 40px;
   border-radius: 5px;
-  padding: 015px
+  padding: 0 15px
   background: #eee;
   border: 1px solid #ddd;
   font-size: 18px
@@ -33,9 +33,16 @@ export const SubmitButton = styled.TouchableOpacity`
   margin-left: 5px;
 `;
 
-export const List = styled.FlatList``;
+export const List = styled.FlatList.attrs({
+  showsVerticalScrollIndicator: false,
+})`
+  margin-top: 20px;
+`;
 
-export const Avatar = styled.Image``;
+export const Avatar = styled.Image`
+  width: 50px;
+  height: 50px;
+`;
 
 export const User = styled.Text``;
 
