@@ -31,6 +31,7 @@ export const SubmitButton = styled.TouchableOpacity`
   background: #111;
   border-radius: 5px;
   margin-left: 5px;
+  opacity: ${props => (props.loading ? 0.7 : 1)};
 `;
 
 export const List = styled.FlatList.attrs({
@@ -39,17 +40,50 @@ export const List = styled.FlatList.attrs({
   margin-top: 20px;
 `;
 
-export const Avatar = styled.Image`
-  width: 50px;
-  height: 50px;
+export const User = styled.View`
+  align-items: center;
+  margin: 0 10px 30px;
+
+  padding: 10px;
+  border-radius: 5px;
 `;
 
-export const User = styled.Text``;
+export const Avatar = styled.Image`
+  width: 64px;
+  height: 64px;
+  margin-top: 10px;
+  background: #fff;
+  border-radius: 32px;
+`;
 
-export const Name = styled.Text``;
+export const Name = styled.Text`
+  font-size: 18px;
+  font-weight: bold;
+  align-items: center;
+  margin-top: 5px;
+`;
 
-export const Bio = styled.Text``;
+export const Bio = styled.Text.attrs({
+  numberOfLines: 2,
+})`
+  font-size: 14px;
+  color: #999;
+  align-items: center;
+  margin: 10px 0;
+`;
 
-export const ProfileButton = styled.TouchableOpacity``;
+export const ProfileButton = styled.TouchableOpacity`
+  padding: 15px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  margin-top: 5px;
+  border-radius: 5px;
+  background: #000;
+`;
 
-export const TextButton = styled.Text``;
+export const TextButton = styled.Text`
+  font-size: 15px;
+  font-weight: bold;
+  color: #fff;
+`;

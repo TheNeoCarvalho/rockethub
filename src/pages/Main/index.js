@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Keyboard,
-  FlatList,
-  Image,
-  Text,
-  View,
-  TouchableOpacity,
-} from 'react-native';
-
+import { Keyboard, ActivityIndicator } from 'react-native';
+import Asyncstarage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../../services/api';
 
@@ -28,8 +21,20 @@ import {
 export default function Main() {
   const [user, setUser] = useState('');
   const [users, setUsers] = useState([]);
+  const [loading, setloading] = useState(false);
+
+  useEffect(() => {
+    async function loadUsers() {
+      const us = await Asyncstarage.getItem('users');
+      if (us) {
+        setUsers(JSON.parse(us));
+      }
+    }
+    loadUsers();
+  }, [users]);
 
   async function findUser() {
+    setloading(true);
     const response = await api.get(`/${user}`);
 
     const data = {
@@ -39,8 +44,10 @@ export default function Main() {
       avatar: response.data.avatar_url,
     };
 
+    Asyncstarage.setItem('users', JSON.stringify([...users, data]));
     setUsers([...users, data]);
     setUser('');
+    setloading(false);
 
     Keyboard.dismiss();
   }
@@ -57,8 +64,12 @@ export default function Main() {
           returnKeyType="send"
           onSubmitEditing={findUser}
         />
-        <SubmitButton onPress={findUser}>
-          <Icon name="person-add" size={20} color="#fff" />
+        <SubmitButton loading={loading} onPress={findUser}>
+          {loading ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <Icon name="person-add" size={20} color="#fff" />
+          )}
         </SubmitButton>
       </Form>
 
@@ -67,14 +78,14 @@ export default function Main() {
         keyExtractor={item => item.name}
         renderItem={({ item }) => {
           return (
-            <View>
+            <User>
               <Avatar source={{ uri: item.avatar }} />
-              <Text>{item.name}</Text>
-              <Text>{item.bio}</Text>
-              <TouchableOpacity onPress={() => {}}>
-                <Text>Visualizar perfil</Text>
-              </TouchableOpacity>
-            </View>
+              <Name>{item.name}</Name>
+              <Bio>{item.bio}</Bio>
+              <ProfileButton onPress={() => {}}>
+                <TextButton>Visualizar perfil</TextButton>
+              </ProfileButton>
+            </User>
           );
         }}
       />
