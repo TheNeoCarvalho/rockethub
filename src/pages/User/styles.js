@@ -6,7 +6,7 @@ export const Container = styled.View`
 `;
 
 export const Header = styled.View`
-  background: #000;
+  background: #fff;
   border-radius: 5px;
   align-items: center;
   padding-bottom: 20px;
@@ -27,7 +27,7 @@ export const Name = styled.Text`
   font-size: 18px;
   margin-top: 10px;
   text-align: center;
-  color: #eee;
+  color: #333;
 `;
 
 export const Bio = styled.Text`
@@ -45,7 +45,7 @@ export const Stars = styled.FlatList.attrs({
 `;
 
 export const Starred = styled.View`
-  background: #000;
+  background: #eee;
   padding: 10px 15px;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -68,7 +68,7 @@ export const Info = styled.View`
 export const Title = styled.Text`
   font-size: 15px;
   font-weight: bold;
-  color: #fff;
+  color: #666;
 `;
 
 export const Author = styled.Text`
