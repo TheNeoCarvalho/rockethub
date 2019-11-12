@@ -18,10 +18,10 @@ export const Input = styled.TextInput.attrs({
   flex: 1;
   height: 40px;
   border-radius: 5px;
-  padding: 0 15px
+  padding: 0 15px;
   background: #eee;
   border: 1px solid #ddd;
-  font-size: 18px
+  font-size: 18px;
 `;
 
 export const SubmitButton = styled.TouchableOpacity`
@@ -70,6 +70,7 @@ export const Bio = styled.Text.attrs({
   color: #999;
   align-items: center;
   margin: 10px 0;
+  text-align: center;
 `;
 
 export const ProfileButton = styled.TouchableOpacity`

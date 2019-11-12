@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+
 import { Keyboard, ActivityIndicator } from 'react-native';
 import Asyncstarage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -18,7 +20,7 @@ import {
   TextButton,
 } from './styles';
 
-export default function Main() {
+export default function Main({ navigation }) {
   const [user, setUser] = useState('');
   const [users, setUsers] = useState([]);
   const [loading, setloading] = useState(false);
@@ -32,6 +34,10 @@ export default function Main() {
     }
     loadUsers();
   }, [users]);
+
+  function handleNavite(user) {
+    navigation.navigate('User', { user });
+  }
 
   async function findUser() {
     setloading(true);
@@ -82,7 +88,7 @@ export default function Main() {
               <Avatar source={{ uri: item.avatar }} />
               <Name>{item.name}</Name>
               <Bio>{item.bio}</Bio>
-              <ProfileButton onPress={() => {}}>
+              <ProfileButton onPress={() => handleNavite(item)}>
                 <TextButton>Visualizar perfil</TextButton>
               </ProfileButton>
             </User>
